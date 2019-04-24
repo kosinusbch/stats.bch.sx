@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Merchantfees - Realistic Fee Estimation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/assets/fees.css" media="all">
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+        <script src="assets/fees.js"></script>
+    </head>
+    <body>
+        <div class="page_wrapper">
+            <header>
+                <h2>Merchant Fees</h2>
+                <p>Because fees paid by a normal single input, two output transaction is wastly different to that of a merchant.</p>
+            </header>
+            <div class="merchant_profile">
+                <img id="merchant_icon" src="/assets/small_merchant.svg">
+                <div class="">
+                    <h2 id="merchant_name">loading..</h2>
+                    <h2><input type="submit" onclick="updateMerchant('small');" value="Small Merchant"></button><input type="submit" onclick="updateMerchant('medium');" value="Medium Merchant"></button><input type="submit" onclick="updateMerchant('large');" value="Large Merchant"></button><input type="submit" onclick="updateMerchant('custom');" value="Custom"></button></h2>
+                    <p id="merchant_desc">loading..</p>
+                </div>
+            </div>
+            <div class="fee_container">
+                <div class="fee_box btc_fees">
+                    Calculating..
+                </div>
+                <div class="fee_box bch_fees">
+                    Calculating..
+                </div>
+                <div class="fee_box paypal_fees">
+                    Calculating..
+                </div>
+                <div class="fee_box stripe_fees">
+                    Calculating..
+                </div>
+            </div>
+        </div>
+        <script>
+            window.onload = function (event) {
+                var hash = window.location.hash.substr(1);
+
+                var matched = /custom-([^\n\r]*)-([^\n\r]*)-([^\n\r]*)/g.exec(hash);
+                if (matched) {
+                    console.log(matched);
+
+                    var product_price = matched[1];
+                    var txin = matched[2];
+                    var feetype = matched[3];
+                    updateMerchant('custom');
+                    window.location.hash = '#'+hash;
+                    loadCustom(product_price,txin,feetype);
+
+                } else if (hash !== null && hash !== undefined && hash !== "") {
+                    console.log('Merchant type: '+hash);
+                    updateMerchant(hash);
+                } else if (hash == null || hash == undefined || hash == "") {
+                    updateMerchant('small');
+                    window.location.hash = '#small';
+                }
+
+            };
+            
+        </script>
+    </body>
+</html>

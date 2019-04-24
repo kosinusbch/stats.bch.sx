@@ -1,0 +1,119 @@
+html, body {
+    font-family: arial,sans-serif;
+    font-size: 1.05em;
+    background: #f5f5f7;
+    margin: 0;
+    padding: 0;
+}
+
+.page_wrapper {
+    max-width: 1600px;
+    width: 95%;
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.options_container {
+    text-align: center;
+}
+
+.fee_container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: stretch;
+}
+
+.fee_box {
+    /*display: inline-flex;*/
+    box-sizing: border-box;
+    background: #000;
+    color: #fff;
+    padding: 0px 15px 0px 15px;
+    margin: 1px 3px 4px 3px;
+    width: 100%;
+    border-radius: 5px;
+    flex: 1;
+    flex-basis: 320px;
+}
+
+.fee_box img {
+    height: 36px;
+    margin: -5px 9px 0px 0px;
+    vertical-align: middle;
+}
+
+.fee_box:hover {
+    background: #1f2d2a;
+}
+
+.left_with {
+    background: #00ff7f;
+    padding: 10px;
+    text-align: center;
+    color: #000;
+    border-radius: 4px;
+}
+
+.merchant_profile {
+    box-sizing: border-box;
+    display: flex;
+    background: #00ff7f;
+    padding: 22px 50px 22px 50px;
+    border-radius: 10px;
+    margin: 1px 3px 6px 3px;
+}
+
+.merchant_profile img {
+    max-height: 90px;
+    margin: auto 4% auto 0px;
+    max-width: 90px;
+}
+
+.loading {
+    opacity: 0.8;
+}
+
+input[type="submit"] {
+    color: #fff;
+    background: #000;
+    padding: 6px 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+h2 input[type="submit"] {
+    font-size: 0.6em;
+    margin: 0px 2px;
+}
+
+input[type="text"], input[type="number"], select {
+    box-sizing: border-box;
+    display: block;
+    padding: 10px 5px;
+    margin: 2px 0px 10px 0px;
+    width: 100%;
+}
+
+select {
+    max-width: 200px;
+}
+
+@media only screen and (max-width: 1320px) {
+    .page_wrapper {
+        max-width: 95%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .merchant_profile img {
+        display: none;
+    }
+}
