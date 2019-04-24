@@ -6,9 +6,7 @@ for(var x=0;x<preloads.length;x++) {
 }
 
 function updateMerchant(type) {
-
     window.location.hash = '#'+type;
-
     var data = {
         "small": {
             "name":"Small Merchant",
@@ -42,12 +40,12 @@ function updateMerchant(type) {
         },
         "custom": {
             "name":"Custom",
-            "description":"<p class=\"custom_menu\"><label for=\"product_price\">Product Price</label> <input id=\"product_price\" name=\"product_price\" type=\"number\" value=\"4\"> <label for=\"orders\">Orders</label> <input id=\"orders\" name=\"orders\" type=\"number\" value=\"300\"> <label for=\"feetype\">Fee Timeline</label> <select id=\"feetype\" name=\"feetype\"> <option value=\"realtime\">Realtime</option> <option value=\"ath\">All Time High (Price + Fees)</option> </select> <input type=\"submit\" onclick=\"loadCustomForm();\" value=\"Generate\"> </p>",
+            "description":"<p class=\"custom_menu\"><label for=\"product_price\">Product Price</label> <input id=\"product_price\" name=\"product_price\" type=\"number\" value=\"3\"> <label for=\"orders\">Orders</label> <input id=\"orders\" name=\"orders\" type=\"number\" value=\"300\"> <label for=\"feetype\">Fee Timeline</label> <select id=\"feetype\" name=\"feetype\"> <option value=\"realtime\">Realtime</option> <option value=\"ath\">All Time High (Price + Fees)</option> </select> <input type=\"submit\" onclick=\"loadCustomForm();\" value=\"Generate\"> </p>",
             "icon":"/assets/question.svg",
             "timeframe": "fastestFee",
             "txin": 300,
             "txout": 2,
-            "product_price": 4,
+            "product_price": 3,
             "feetype": "realtime"
         }
     }
@@ -65,9 +63,6 @@ function updateMerchant(type) {
         $("#merchant_desc").replaceWith('<div id="merchant_desc"><p><b>$'+(data.product_price * data.txin).toFixed(2)+'</b> in monthly sales, divided by <b>'+data.txin+'</b> orders at <b>$'+data.product_price.toFixed(2)+'</b> each. '+data.description+'</p></div>');
         $("#merchant_icon").replaceWith('<img id="merchant_icon" src="'+data.icon+'">');
     }
-
-
-
 }
 
 function getFees(timeframe, txin, txout, feetype, product_price) {
@@ -78,9 +73,7 @@ function getFees(timeframe, txin, txout, feetype, product_price) {
     $( ".fee_box" ).addClass('loading');
 
     var btc_fee = fetch('https://bitcoinfees.earn.com/api/v1/fees/recommended').then(function(response){ return response.json(); });
-
     var btc_price = fetch('https://api.coincap.io/v2/rates/bitcoin').then(function(response){ return response.json(); });
-
     var bch_price = fetch('https://api.coincap.io/v2/rates/bitcoin-cash').then(function(response){ return response.json(); });
 
     Promise.all([btc_fee,btc_price,bch_price]).then(function(results){
@@ -100,7 +93,6 @@ function getFees(timeframe, txin, txout, feetype, product_price) {
         }
 
         total_usd = txin * product_price;
-
         btc_usd = ((btc_satbyte * txbytes) / 100000000) * results.btc_price;
         btc_usd_ratio = ((btc_usd / product_price) / txin) * 100;
         bch_usd = ((bch_satbyte * txbytes) / 100000000) * results.bch_price;
@@ -121,13 +113,10 @@ function getFees(timeframe, txin, txout, feetype, product_price) {
 function getFeesPayPal(txin, product_price) {
     var amount = product_price;
     var amount = (amount - 0.30);
-    console.log(amount);
     var amount = (amount / 1.044);
-    console.log(amount);
     
     var fee_per = (product_price - amount);
     var fee_total = fee_per * txin;
-
     var fee_precentage = ((fee_total / (product_price * txin)) * 100).toFixed(2);
 
     $(".paypal_fees").replaceWith('<div class="fee_box paypal_fees"><h1>PayPal</h1><p>$0.30 + 4.4%</p><p>'+fee_precentage+'% of holdings</p><p>$'+fee_total.toFixed(2)+' in fees</p><p class="left_with">$'+((product_price * txin) - fee_total).toFixed(2)+' after fees</p></div>');
@@ -137,13 +126,10 @@ function getFeesPayPal(txin, product_price) {
 function getFeesStripe(txin, product_price) {
     var amount = product_price;
     var amount = (amount - 0.30);
-    console.log(amount);
     var amount = (amount / 1.029);
-    console.log(amount);
     
     var fee_per = (product_price - amount);
     var fee_total = fee_per * txin;
-
     var fee_precentage = ((fee_total / (product_price * txin)) * 100).toFixed(2);
 
     $(".stripe_fees").replaceWith('<div class="fee_box stripe_fees"><h1>Stripe</h1><p>$0.30 + 2.9%</p><p>'+fee_precentage+'% of holdings</p><p>$'+fee_total.toFixed(2)+' in fees</p><p class="left_with">$'+((product_price * txin) - fee_total).toFixed(2)+' after fees</p></div>');
@@ -155,7 +141,6 @@ function loadCustomForm() {
     var feetype = $('#feetype').val();
     getFees('fastestFee', txin, 2, feetype, product_price);
     window.location.hash = '#custom-'+product_price+'-'+txin+'-'+feetype;
-
 }
 
 function loadCustom(product_price,txin,feetype) {
