@@ -72,8 +72,8 @@ function updateMerchant(type) {
 
 function getFees(timeframe, txin, txout, feetype, product_price) {
     var bytesPerIn = 148;
-    var bytesPerOut = 44;
-    var txbytes = (txin * bytesPerIn + txout * bytesPerOut + 10);
+    var bytesPerOut = 34;
+    var txbytes = ((txin * bytesPerIn) + (txout * bytesPerOut) + 10); // estimate, some places this might be different
 
     $( ".fee_box" ).addClass('loading');
 

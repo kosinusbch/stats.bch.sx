@@ -5,9 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="/assets/fees.css" media="all">
         <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+        <script src="https://paybutton.cash/pre-release/v0.1/js/paybutton.min.js"></script>
         <script src="assets/fees.js"></script>
     </head>
     <body>
+
+        <div class="topnav">
+            <ul>
+                <li><a href="">BCH Statistics</a></li>
+                <li><a href="/">Merchant Fees</a></li>
+            </ul>
+        </div>
+
         <div class="page_wrapper">
             <header>
                 <h2>Merchant Fees</h2>
@@ -35,6 +44,7 @@
                     Calculating..
                 </div>
             </div>
+            <p>*fee estimates are realtime and provided by earn.com</p>
         </div>
         <script>
             window.onload = function (event) {
@@ -62,5 +72,12 @@
             };
             
         </script>
+        <div class="donate">
+            <button class="pay-button" button-text="Donate BCH" address="bitcoincash:qr93wcn747v3gxdv9zd4074tzl7f227rh583l3r6h2"></button>
+        </div>
+        <footer>
+            <a target="_blank" href="https://github.com/kosinusbch/stats.bch.sx">View on GitHub</a>
+            <a target="_blank" href="https://t.me/fountainheadcash">Developer Telegram</a>
+        </footer>
     </body>
 </html>
