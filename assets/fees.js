@@ -69,6 +69,7 @@ function getFees(timeframe, txin, txout, feetype, product_price) {
     var bytesPerIn = 148;
     var bytesPerOut = 34;
     var txbytes = ((txin * bytesPerIn) + (txout * bytesPerOut) + 10); // estimate, some situations and combinations this might be different
+    var txkbytes = (txbytes / Math.pow(1024,1)).toFixed(2);
 
     $( ".fee_box" ).addClass('loading');
 
@@ -98,8 +99,8 @@ function getFees(timeframe, txin, txout, feetype, product_price) {
         bch_usd = ((bch_satbyte * txbytes) / 100000000) * results.bch_price;
         bch_usd_ratio = ((bch_usd / product_price) / txin) * 100;
 
-        $(".btc_fees").replaceWith('<div class="fee_box btc_fees"><h1><img src="/assets/btc.png">BTC</h1><p>'+btc_satbyte+' sat/b</p><p>'+btc_usd_ratio.toFixed(2)+'% of revenue</p><p>'+((btc_satbyte * txbytes) / 100000000).toFixed(8)+' BTC ~ $'+btc_usd.toFixed(2)+' in fees</p><p class="left_with">$'+(total_usd - btc_usd).toFixed(2)+' after fees</p></div>');
-        $(".bch_fees").replaceWith('<div class="fee_box bch_fees"><h1><img src="/assets/bch.png">BCH</h1><p>'+bch_satbyte+' sat/b</p><p>'+bch_usd_ratio.toFixed(4)+'% of revenue</p><p>'+((bch_satbyte * txbytes) / 100000000).toFixed(8)+' BCH ~ $'+bch_usd.toFixed(4)+' in fees</p><p class="left_with">$'+(total_usd - bch_usd).toFixed(2)+' after fees</p></div>');
+        $(".btc_fees").replaceWith('<div class="fee_box btc_fees"><h1><img src="/assets/btc.png">BTC</h1><p>'+btc_satbyte+' sat/b @ '+txkbytes+' KB</p><p>'+btc_usd_ratio.toFixed(2)+'% of revenue</p><p>'+((btc_satbyte * txbytes) / 100000000).toFixed(8)+' BTC ~ $'+btc_usd.toFixed(2)+' in fees</p><p class="left_with">$'+(total_usd - btc_usd).toFixed(2)+' after fees</p></div>');
+        $(".bch_fees").replaceWith('<div class="fee_box bch_fees"><h1><img src="/assets/bch.png">BCH</h1><p>'+bch_satbyte+' sat/b @ '+txkbytes+' KB</p><p>'+bch_usd_ratio.toFixed(4)+'% of revenue</p><p>'+((bch_satbyte * txbytes) / 100000000).toFixed(8)+' BCH ~ $'+bch_usd.toFixed(4)+' in fees</p><p class="left_with">$'+(total_usd - bch_usd).toFixed(2)+' after fees</p></div>');
     
         getFeesPayPal(txin, product_price);
         getFeesStripe(txin, product_price);
