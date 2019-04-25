@@ -60,7 +60,7 @@ function updateMerchant(type) {
     } else {
         getFees(data.timeframe, data.txin, data.txout, data.feetype, data.product_price);
         $("#merchant_name").replaceWith('<h2 id="merchant_name">'+data.name+'</h2>');
-        $("#merchant_desc").replaceWith('<div id="merchant_desc"><p><b>$'+(data.product_price * data.txin).toFixed(2)+'</b> in monthly sales, divided by <b>'+data.txin+'</b> orders at <b>$'+data.product_price.toFixed(2)+'</b> each. '+data.description+'</p></div>');
+        $("#merchant_desc").replaceWith('<div id="merchant_desc"><p><b>$'+(data.product_price * data.txin).toFixed(2)+'</b> in monthly revenue, divided by <b>'+data.txin+'</b> orders at <b>$'+data.product_price.toFixed(2)+'</b> each. '+data.description+'</p></div>');
         $("#merchant_icon").replaceWith('<img id="merchant_icon" src="'+data.icon+'">');
     }
 }
